@@ -1,22 +1,56 @@
-# Customer Support AI Trainer
+# 🚀 Customer Support AI Trainer
 
 ## Overview
-This project simulates real-world customer support scenarios using an AI agent.
+
+This project simulates real customer support problems using AI.
+
+It helps an AI agent:
+
+* Understand customer queries
+* Choose the correct action
+* Give a reason for the action
+
+---
 
 ## Features
-- Query classification
-- Action selection (apologize, refund, etc.)
-- Reward-based evaluation
-- Explainable AI (reason output)
+
+* Easy, Medium, Hard questions
+* AI gives answers + reasons
+* Score system (0 to 1)
+* Streamlit UI
+
+---
 
 ## Files
-- env.py → environment logic
-- agent.py → AI decision logic
-- streamlit_app.py → UI
-- run_agent.py → baseline testing
 
-## Run Locally
+* env.py → handles environment
+* agent.py → AI logic
+* streamlit_app.py → UI
+* run_agent.py → testing
+* openenv.yaml → rules
 
-```bash
+---
+
+## How to Run
+
+Install:
 pip install -r requirements.txt
+
+Run:
 streamlit run streamlit_app.py
+
+---
+
+## Test AI
+
+Run:
+python run_agent.py
+
+---
+
+## Why this project is good
+
+* Real-world use
+* Simple AI system
+* Easy to understand
+* Ready for hackathon
