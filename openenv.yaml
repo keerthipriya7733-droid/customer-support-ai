@@ -1,0 +1,22 @@
+name: Customer Support AI Environment
+description: Simulates customer support scenarios with AI decision-making
+
+observation_space:
+  type: object
+  properties:
+    query: string
+    category: string
+    difficulty: string
+
+action_space:
+  type: string
+  enum:
+    - apologize
+    - give_refund
+    - ask_for_details
+    - ignore
+
+reward_range: [0.0, 1.0]
+
+episodes:
+  min: 3
