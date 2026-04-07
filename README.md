@@ -54,3 +54,12 @@ python run_agent.py
 * Simple AI system
 * Easy to understand
 * Ready for hackathon
+
+## 💡 Example Output
+
+Query: "I want refund"  
+AI Action: give_refund  
+Reason: Customer has refund issue  
+Reward: 1.0  
+
+---
