@@ -3,23 +3,18 @@ from agent import simple_agent
 
 env = CustomerSupportEnv()
 
-episodes = 5
-total_reward = 0
+total = 0
 
-for i in range(episodes):
+for _ in range(5):
     state = env.reset()
-    query = state["query"]
+    action, reason = simple_agent(state["query"])
+    _, reward, _, _, _ = env.step(action)
 
-    action, reason = simple_agent(query)
+    print(state["query"])
+    print(action, "|", reason)
+    print("Reward:", reward)
+    print("------")
 
-    state, reward, done, reply, status = env.step(action)
+    total += reward
 
-    print(f"\nQuery: {query}")
-    print(f"Action: {action}")
-    print(f"Reason: {reason}")
-    print(f"Reward: {reward}")
-    print(f"Status: {status}")
-
-    total_reward += reward
-
-print("\nFinal Score:", total_reward / episodes)
+print("Average Score:", total / 5)
