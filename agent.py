@@ -1,26 +1,32 @@
 def simple_agent(query):
     query = query.lower()
 
-    # 🔹 Delivery issues
-    if "where" in query or "late" in query or "delayed" in query or "not arrived" in query:
-        return "ask_for_details", "Customer is asking about delivery status"
+    score_map = {
+        "refund": ["refund", "money", "charged", "payment"],
+        "delivery": ["where", "late", "delayed", "not arrived"],
+        "product": ["damaged", "broken", "wrong item"],
+        "complaint": ["bad", "terrible", "frustrated", "angry"],
+        "technical": ["app", "crash", "error"]
+    }
 
-    # 🔹 Refund / Payment issues
-    elif "refund" in query or "money" in query or "charged" in query or "payment" in query:
-        return "give_refund", "Customer has a refund or payment issue"
+    scores = {k: 0 for k in score_map}
 
-    # 🔹 Product issues
-    elif "damaged" in query or "broken" in query or "wrong item" in query:
-        return "ask_for_details", "Product issue needs more details"
+    for category, keywords in score_map.items():
+        for word in keywords:
+            if word in query:
+                scores[category] += 1
 
-    # 🔹 Complaint / Angry tone
-    elif "bad" in query or "terrible" in query or "frustrated" in query or "angry" in query:
-        return "apologize", "Customer is expressing frustration"
+    best_category = max(scores, key=scores.get)
 
-    # 🔹 App / technical issues
-    elif "app" in query or "crash" in query or "error" in query:
-        return "ask_for_details", "Technical issue requires investigation"
-
-    # 🔹 Default fallback
+    if best_category == "refund":
+        return "give_refund", "Detected refund/payment issue"
+    elif best_category == "delivery":
+        return "ask_for_details", "Delivery issue detected"
+    elif best_category == "product":
+        return "ask_for_details", "Product issue needs clarification"
+    elif best_category == "complaint":
+        return "apologize", "Customer is unhappy"
+    elif best_category == "technical":
+        return "ask_for_details", "Technical issue detected"
     else:
-        return "ask_for_details", "General query, more details required"
+        return "ask_for_details", "General query"
