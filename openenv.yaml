@@ -1,5 +1,5 @@
-name: Customer Support AI Environment
-description: Simulates customer support scenarios with AI decision-making
+name: Customer Support AI
+description: AI environment for handling customer support queries
 
 observation_space:
   type: object
@@ -17,6 +17,5 @@ action_space:
     - ignore
 
 reward_range: [0.0, 1.0]
-
 episodes:
   min: 3
