@@ -14,29 +14,29 @@ class CustomerSupportEnv:
         return self.state()
 
     def state(self):
-        return {
-            "query": self.current["query"],
-            "category": self.current["category"],
-            "difficulty": self.current["difficulty"]
-        }
+        return self.current
 
     def step(self, action):
         correct = self._correct_action(self.current["category"])
 
+        # 🎯 Reward logic
         if action == correct:
             reward = 1.0
-            status = "✅ Correct action"
-        elif action in ["apologize", "ask_for_details"]:
+            status = "✅ Perfect"
+        elif action in ["ask_for_details", "apologize"]:
             reward = 0.5
-            status = "⚠️ Partially correct"
+            status = "⚠️ Acceptable"
         else:
             reward = 0.0
-            status = "❌ Incorrect"
+            status = "❌ Wrong"
 
-        reply = f"AI handled with action: {action}"
+        # Bonus for hard problems
+        if self.current["difficulty"] == "hard" and reward == 1.0:
+            reward = 1.0  # keep within OpenEnv limit
 
-        done = True
-        return self.state(), reward, done, reply, status
+        reply = f"Action taken: {action}"
+
+        return self.state(), reward, True, reply, status
 
     def _correct_action(self, category):
         mapping = {
