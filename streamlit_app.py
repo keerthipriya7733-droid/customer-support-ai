@@ -38,8 +38,8 @@ mode = st.radio("Mode", ["User", "AI"])
 # Action
 if mode == "AI":
     action, reason = simple_agent(state["query"])
-    st.success(f"AI Action: {action}")
-    st.caption(f"Reason: {reason}")
+    st.success(f"🤖 AI Action: {action}")
+    st.info(f"🧠 Reason: {reason}")
 else:
     action = st.selectbox(
         "Choose Action",
