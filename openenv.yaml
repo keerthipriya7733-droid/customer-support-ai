@@ -1,22 +1,13 @@
-name: Customer Support AI Environment
-description: AI system to simulate customer support decision making
-
-observation_space:
-  type: object
-  properties:
-    query: string
-    category: string
-    difficulty: string
+name: customer-support-ai
+description: Customer support simulation environment for training AI agents
+version: 1.0
 
 action_space:
-  type: string
-  enum:
-    - apologize
-    - give_refund
-    - ask_for_details
-    - ignore
+  type: text
+  description: Agent response to customer query
+
+observation_space:
+  type: text
+  description: Customer query with context (history + sentiment)
 
 reward_range: [0.0, 1.0]
-
-episodes:
-  min: 3
