@@ -56,6 +56,7 @@ if st.button("Submit"):
     st.write(reply)
     st.write(status)
     st.write("Reward:", reward)
+    st.progress(reward)
 
     st.session_state.score += reward
 
