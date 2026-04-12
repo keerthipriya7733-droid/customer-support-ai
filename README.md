@@ -1,65 +1,91 @@
-# 🚀 Customer Support AI Trainer
+---
+title: Customer Support AI
+emoji: 🤖
+colorFrom: blue
+colorTo: green
+sdk: gradio
+app_file: app.py
+pinned: false
+---
 
-## Overview
+# 🤖 Customer Support AI (OpenEnv Environment)
 
-This project simulates real customer support problems using AI.
+## 📌 Description
+This project simulates a real-world customer support system where an AI agent interacts with users and receives rewards based on response quality.
 
-It helps an AI agent:
-
-* Understand customer queries
-* Choose the correct action
-* Give a reason for the action
+It is designed as a **reinforcement learning environment** using the OpenEnv specification.
 
 ---
 
-## Features
-
-* Easy, Medium, Hard questions
-* AI gives answers + reasons
-* Score system (0 to 1)
-* Streamlit UI
-
----
-
-## Files
-
-* env.py → handles environment
-* agent.py → AI logic
-* streamlit_app.py → UI
-* run_agent.py → testing
-* openenv.yaml → rules
+## 🎯 Features
+- Multi-step conversation
+- Sentiment-aware responses (angry, neutral, happy)
+- Reward-based evaluation (0.0 – 1.0)
+- Easy → Medium → Hard tasks
+- Baseline performance evaluation
+- Interactive UI using Gradio
 
 ---
 
-## How to Run
+## ⚙️ Environment API
 
-Install:
+### `reset(difficulty)`
+Initializes a new task and returns the initial state.
+
+### `step(action)`
+Takes an agent response and returns:
+- next state  
+- reward  
+- done flag  
+
+### `state()`
+Returns:
+- customer query  
+- conversation history  
+- sentiment  
+
+---
+
+## 🎮 Action Space
+- Text response from the agent
+
+---
+
+## 👀 Observation Space
+- Customer query  
+- Conversation history  
+- Sentiment  
+
+---
+
+## 🧮 Reward Design
+Reward is calculated based on:
+
+- ✔ Intent match (refund/order)
+- ✔ Politeness (sorry, please)
+- ✔ Helpfulness (assist/help)
+- ✔ Sentiment handling (angry users need apology)
+- ❌ Penalty for very short responses
+
+Range: **0.0 to 1.0**
+
+---
+
+## 🧪 Tasks
+
+### Easy
+Simple order tracking query
+
+### Medium
+Refund request for damaged product
+
+### Hard
+Angry customer with complaint
+
+---
+
+## 🚀 How to Run
+
+```bash
 pip install -r requirements.txt
-
-Run:
-streamlit run streamlit_app.py
-
----
-
-## Test AI
-
-Run:
-python run_agent.py
-
----
-
-## Why this project is good
-
-* Real-world use
-* Simple AI system
-* Easy to understand
-* Ready for hackathon
-
-## 💡 Example Output
-
-Query: "I want refund"  
-AI Action: give_refund  
-Reason: Customer has refund issue  
-Reward: 1.0  
-
----
+python app.py
